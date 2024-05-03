@@ -1,0 +1,48 @@
+<div
+	class="modal fade"
+	id="orderDetailsModal{{ order.id }}"
+	tabindex="-1"
+	role="dialog"
+	aria-labelledby="orderDetalsModalTitle"
+	aria-hidden="true"
+>
+	<div class="modal-dialog modal-dialog-centered" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLongTitle">
+					{{ order.user.user_name }} -
+					{{order.request_time.strftime('%d-%m-%Y')}}
+				</h5>
+				<button
+					type="button"
+					class="close"
+					data-dismiss="modal"
+					aria-label="Close"
+				>
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<p><strong>Allergies</strong> : {{ order.allergies }}</p>
+				<p><strong>Dietary Restriction</strong> : {{ order.dietary_restriction }}</p>
+			</div>
+			<div class="modal-footer">
+				
+				<form
+					id="confirmOrderForm"
+					action="{{ url_for('order_controller.confirm_order', order_id=order.id) }}"
+					method="POST"
+				>
+					<button class="btn btn-primary" type="submit">Confirm Order</button>
+				</form>
+				<form
+					id="confirmOrderForm"
+					action="{{ url_for('order_controller.deny_order', order_id=order.id) }}"
+					method="POST"
+				>
+					<button class="btn btn-danger" type="submit">Deny Order</button>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
